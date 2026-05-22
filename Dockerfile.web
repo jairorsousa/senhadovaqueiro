@@ -13,7 +13,7 @@ COPY packages/ui/package.json packages/ui/package.json
 RUN pnpm install --frozen-lockfile
 
 FROM deps AS builder
-ARG NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com.br
+ARG NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 COPY . .
 RUN pnpm --filter @senha-do-vaqueiro/shared build

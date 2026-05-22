@@ -74,7 +74,7 @@ services:
       context: .
       dockerfile: Dockerfile.web
       args:
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://api.senhadovaqueiro.com.br}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://api.senhadovaqueiro.com}
     image: senha-do-vaqueiro/web:prod
     container_name: senha-do-vaqueiro-prod-web
     restart: unless-stopped
@@ -85,7 +85,7 @@ services:
       NODE_ENV: production
       PORT: ${WEB_PORT:-3100}
       HOSTNAME: 0.0.0.0
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://api.senhadovaqueiro.com.br}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://api.senhadovaqueiro.com}
     expose:
       - "${WEB_PORT:-3100}"
     depends_on:

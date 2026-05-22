@@ -3,7 +3,7 @@ set -eu
 
 COMPOSE_FILE="${COMPOSE_FILE:-docker-compose.prod.yml}"
 ENV_FILE="${ENV_FILE:-.env.production}"
-HEALTH_URL="${HEALTH_URL:-https://api.senhadovaqueiro.com.br/health}"
+HEALTH_URL="${HEALTH_URL:-https://api.senhadovaqueiro.com/health}"
 
 if [ ! -f "$ENV_FILE" ]; then
   echo "Arquivo $ENV_FILE nao encontrado." >&2

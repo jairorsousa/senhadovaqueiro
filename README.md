@@ -84,8 +84,8 @@ O ambiente de producao foi preparado para uma VPS compartilhada:
 
 - O PostgreSQL nao roda na VPS; use um banco gerenciado externo em `DATABASE_URL`.
 - O acesso publico entra pelo Cloudflare Tunnel.
-- O dominio principal e `https://senhadovaqueiro.com.br`.
-- A API publica fica em `https://api.senhadovaqueiro.com.br`.
+- O dominio principal e `https://senhadovaqueiro.com`.
+- A API publica fica em `https://api.senhadovaqueiro.com`.
 - O compose de producao nao publica portas padrao como `80`, `443`, `3000`, `3333`, `5432` ou `6379`.
 - O Redis roda apenas na rede interna do Docker, na porta interna `6381` por padrao.
 
@@ -154,12 +154,12 @@ psql "$DATABASE_URL" -c "select 1;"
 
 Na Cloudflare:
 
-1. Garanta que a zona `senhadovaqueiro.com.br` esta ativa.
+1. Garanta que a zona `senhadovaqueiro.com` esta ativa.
 2. Crie um tunnel para a aplicacao.
 3. Configure os public hostnames:
-   - `senhadovaqueiro.com.br` apontando para `http://web:3100`;
-   - `api.senhadovaqueiro.com.br` apontando para `http://api:3400`;
-   - `www.senhadovaqueiro.com.br` redirecionando para `senhadovaqueiro.com.br`.
+   - `senhadovaqueiro.com` apontando para `http://web:3100`;
+   - `api.senhadovaqueiro.com` apontando para `http://api:3400`;
+   - `www.senhadovaqueiro.com` redirecionando para `senhadovaqueiro.com`.
 4. Copie o token do tunnel para `CLOUDFLARE_TUNNEL_TOKEN`.
 
 O arquivo `docker/cloudflared/config.example.yml` mostra a topologia esperada para quem preferir tunnel por arquivo de configuracao. Nunca versione credenciais reais da Cloudflare.
@@ -189,13 +189,13 @@ nano .env.production
 
 Preencha pelo menos:
 
-- `APP_URL=https://senhadovaqueiro.com.br`
-- `API_URL=https://api.senhadovaqueiro.com.br`
-- `NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com.br`
+- `APP_URL=https://senhadovaqueiro.com`
+- `API_URL=https://api.senhadovaqueiro.com`
+- `NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com`
 - `DATABASE_URL=...`
 - `JWT_ACCESS_SECRET=...`
 - `JWT_REFRESH_SECRET=...`
-- `COOKIE_DOMAIN=.senhadovaqueiro.com.br`
+- `COOKIE_DOMAIN=.senhadovaqueiro.com`
 - `COOKIE_SECURE=true`
 - `CLOUDFLARE_TUNNEL_TOKEN=...`
 - variaveis Pix reais ou de homologacao.
@@ -259,29 +259,29 @@ Se usar seed, troque imediatamente as senhas padrao.
 Verifique health check da API:
 
 ```bash
-curl -fsS https://api.senhadovaqueiro.com.br/health
+curl -fsS https://api.senhadovaqueiro.com/health
 ```
 
 Verifique health check do site:
 
 ```bash
-curl -fsS https://senhadovaqueiro.com.br/health
+curl -fsS https://senhadovaqueiro.com/health
 ```
 
 Verifique o site:
 
 ```bash
-curl -I https://senhadovaqueiro.com.br
+curl -I https://senhadovaqueiro.com
 ```
 
 Depois teste pelo navegador:
 
-1. Acesse `https://senhadovaqueiro.com.br`.
-2. Acesse `https://senhadovaqueiro.com.br/admin`.
+1. Acesse `https://senhadovaqueiro.com`.
+2. Acesse `https://senhadovaqueiro.com/admin`.
 3. Faca login administrativo.
 4. Confirme que a listagem publica abre.
 5. Confirme que o checkout gera Pix em modo homologacao ou producao.
-6. Confirme que o webhook Pix usa `https://api.senhadovaqueiro.com.br/webhooks/payments/:provider`.
+6. Confirme que o webhook Pix usa `https://api.senhadovaqueiro.com/webhooks/payments/:provider`.
 
 #### 9. Operacao basica
 
@@ -321,8 +321,8 @@ Nunca restaure em producao sem antes testar em um banco separado.
 
 #### 10. Checklist antes da primeira venda real
 
-- `https://senhadovaqueiro.com.br` abre corretamente.
-- `https://api.senhadovaqueiro.com.br/health` retorna OK.
+- `https://senhadovaqueiro.com` abre corretamente.
+- `https://api.senhadovaqueiro.com/health` retorna OK.
 - Banco gerenciado tem backup automatico ativo.
 - Restore foi testado em banco separado.
 - Cloudflare Tunnel esta conectado.

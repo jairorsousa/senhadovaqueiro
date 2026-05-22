@@ -851,8 +851,8 @@ Preparar o projeto para produção em uma VPS que também roda outros serviços,
 
 ### Premissas de produção
 
-- Domínio principal: `senhadovaqueiro.com.br`.
-- API pública: `api.senhadovaqueiro.com.br`.
+- Domínio principal: `senhadovaqueiro.com`.
+- API pública: `api.senhadovaqueiro.com`.
 - A VPS não é exclusiva do projeto.
 - O PostgreSQL de produção é gerenciado e roda em outro servidor.
 - O projeto não deve subir container de PostgreSQL em produção.
@@ -897,15 +897,15 @@ O repositório deve documentar duas opções:
 Roteamento esperado:
 
 ```txt
-https://senhadovaqueiro.com.br      -> http://web:3100
-https://www.senhadovaqueiro.com.br  -> redirecionar para https://senhadovaqueiro.com.br
-https://api.senhadovaqueiro.com.br  -> http://api:3400
+https://senhadovaqueiro.com      -> http://web:3100
+https://www.senhadovaqueiro.com  -> redirecionar para https://senhadovaqueiro.com
+https://api.senhadovaqueiro.com  -> http://api:3400
 ```
 
 O endpoint de webhook Pix deve ficar acessível pela API:
 
 ```txt
-https://api.senhadovaqueiro.com.br/webhooks/payments/:provider
+https://api.senhadovaqueiro.com/webhooks/payments/:provider
 ```
 
 ### Variáveis de ambiente mínimas
@@ -913,9 +913,9 @@ https://api.senhadovaqueiro.com.br/webhooks/payments/:provider
 ```env
 NODE_ENV=production
 
-APP_URL=https://senhadovaqueiro.com.br
-API_URL=https://api.senhadovaqueiro.com.br
-NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com.br
+APP_URL=https://senhadovaqueiro.com
+API_URL=https://api.senhadovaqueiro.com
+NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com
 
 API_PORT=3400
 WEB_PORT=3100
@@ -961,7 +961,7 @@ Não incluir variáveis de criação de PostgreSQL local em produção, como `PO
 
 ### Objetivo
 
-Colocar a primeira versão no ar com segurança mínima, usando o domínio `senhadovaqueiro.com.br`, Cloudflare Tunnel e PostgreSQL gerenciado externo.
+Colocar a primeira versão no ar com segurança mínima, usando o domínio `senhadovaqueiro.com`, Cloudflare Tunnel e PostgreSQL gerenciado externo.
 
 ### 20.1 Preparar servidor
 
@@ -1007,12 +1007,12 @@ docker compose -f docker-compose.prod.yml exec api pnpm prisma migrate deploy
 
 Na Cloudflare:
 
-- Garantir que a zona `senhadovaqueiro.com.br` está ativa.
+- Garantir que a zona `senhadovaqueiro.com` está ativa.
 - Criar um Cloudflare Tunnel para o projeto.
 - Configurar public hostnames:
-  - `senhadovaqueiro.com.br` para `http://web:3100`.
-  - `api.senhadovaqueiro.com.br` para `http://api:3400`.
-  - `www.senhadovaqueiro.com.br` como redirect para `senhadovaqueiro.com.br`.
+  - `senhadovaqueiro.com` para `http://web:3100`.
+  - `api.senhadovaqueiro.com` para `http://api:3400`.
+  - `www.senhadovaqueiro.com` como redirect para `senhadovaqueiro.com`.
 - Usar TLS gerenciado pela Cloudflare.
 - Não criar DNS `A` apontando diretamente para a VPS para este projeto.
 
@@ -1041,9 +1041,9 @@ Fluxo recomendado:
 6. Subir containers.
 7. Rodar migrations.
 8. Rodar seed inicial somente se for ambiente novo e controlado.
-9. Verificar `https://api.senhadovaqueiro.com.br/health`.
+9. Verificar `https://api.senhadovaqueiro.com/health`.
 10. Testar login admin.
-11. Testar listagem pública em `https://senhadovaqueiro.com.br`.
+11. Testar listagem pública em `https://senhadovaqueiro.com`.
 
 ### 20.6 Script de deploy
 
@@ -1055,15 +1055,15 @@ docker compose -f docker-compose.prod.yml --env-file .env.production build
 docker compose -f docker-compose.prod.yml --env-file .env.production up -d
 docker compose -f docker-compose.prod.yml --env-file .env.production exec api pnpm prisma migrate deploy
 docker compose -f docker-compose.prod.yml --env-file .env.production ps
-curl -fsS https://api.senhadovaqueiro.com.br/health
+curl -fsS https://api.senhadovaqueiro.com/health
 ```
 
 O script real deve tratar falhas, registrar logs e parar o deploy se o health check falhar.
 
 ### Critérios de aceite
 
-- `https://senhadovaqueiro.com.br` abre via Cloudflare.
-- `https://api.senhadovaqueiro.com.br/health` retorna OK.
+- `https://senhadovaqueiro.com` abre via Cloudflare.
+- `https://api.senhadovaqueiro.com/health` retorna OK.
 - Nenhuma porta padrão da aplicação fica exposta na VPS.
 - API conecta ao PostgreSQL gerenciado externo.
 - Admin consegue logar.
@@ -1154,7 +1154,7 @@ Dar visibilidade mínima para produção em VPS compartilhada com Cloudflare Tun
 
 ### Alertas recomendados
 
-- API fora do ar em `https://api.senhadovaqueiro.com.br/health`.
+- API fora do ar em `https://api.senhadovaqueiro.com/health`.
 - Tunnel Cloudflare desconectado.
 - Banco gerenciado fora do ar ou recusando conexão.
 - Redis fora do ar.
