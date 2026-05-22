@@ -57,6 +57,7 @@ async function main() {
     update: {
       name: "Administrador Senha do Vaqueiro",
       email: "admin@senhadovaqueiro.local",
+      passwordHash: adminPasswordHash,
       role: UserRole.SYSTEM_ADMIN,
       isActive: true
     },
@@ -74,6 +75,7 @@ async function main() {
     update: {
       name: "Organizador Parque Modelo",
       email: "organizador@senhadovaqueiro.local",
+      passwordHash: organizerPasswordHash,
       role: UserRole.ORGANIZER,
       isActive: true
     },
@@ -92,6 +94,7 @@ async function main() {
       name: "Vaqueiro Demo",
       cpf: normalizeCpf("123.456.789-09"),
       whatsapp: "5599999999999",
+      passwordHash: cowboyPasswordHash,
       isActive: true
     },
     create: {
