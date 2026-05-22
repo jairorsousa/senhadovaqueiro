@@ -262,6 +262,12 @@ Verifique health check da API:
 curl -fsS https://api.senhadovaqueiro.com.br/health
 ```
 
+Verifique health check do site:
+
+```bash
+curl -fsS https://senhadovaqueiro.com.br/health
+```
+
 Verifique o site:
 
 ```bash
@@ -415,6 +421,7 @@ O frontend fica em `apps/web` e usa Next.js App Router, Tailwind CSS, TanStack Q
 
 Rotas iniciais:
 
+- `/health`: retorna status do frontend.
 - `/`: experiencia publica em Dark Mode Rodeio.
 - `/vaquejadas`: listagem publica de vaquejadas ativas com busca.
 - `/vaquejadas/[slug]`: detalhe publico da vaquejada e entrada para compra.
