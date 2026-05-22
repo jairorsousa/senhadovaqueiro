@@ -1,0 +1,13 @@
+dist
+.next
+coverage
+node_modules
+pnpm-lock.yaml
+ARQUITETURA-Senha-do-Vaqueiro.md
+design-system-senha-do-vaqueiro.md
+PLAN.md
+PRD-Senha-do-Vaqueiro.md
+Dockerfile.*
+.dockerignore
+.env.production.example
+scripts/*.sh

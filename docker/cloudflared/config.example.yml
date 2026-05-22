@@ -1,0 +1,13 @@
+tunnel: senha-do-vaqueiro
+credentials-file: /etc/cloudflared/credentials.json
+
+ingress:
+  - hostname: senhadovaqueiro.com.br
+    service: http://web:3100
+  - hostname: www.senhadovaqueiro.com.br
+    service: http://web:3100
+    # Preferencialmente crie uma Redirect Rule na Cloudflare para
+    # enviar www.senhadovaqueiro.com.br para senhadovaqueiro.com.br.
+  - hostname: api.senhadovaqueiro.com.br
+    service: http://api:3400
+  - service: http_status:404

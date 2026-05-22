@@ -1,0 +1,1 @@
+ALTER TABLE "orders" ALTER COLUMN "cowboy_id" DROP NOT NULL;

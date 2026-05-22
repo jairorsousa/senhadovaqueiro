@@ -1,0 +1,36 @@
+FROM node:22-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+WORKDIR /app
+
+FROM base AS deps
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/web/package.json apps/web/package.json
+COPY packages/config/package.json packages/config/package.json
+COPY packages/shared/package.json packages/shared/package.json
+COPY packages/ui/package.json packages/ui/package.json
+RUN pnpm install --frozen-lockfile
+
+FROM deps AS builder
+ARG NEXT_PUBLIC_API_URL=https://api.senhadovaqueiro.com.br
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+COPY . .
+RUN pnpm --filter @senha-do-vaqueiro/shared build
+RUN pnpm --filter @senha-do-vaqueiro/ui build
+RUN pnpm --filter web build
+
+FROM base AS runner
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3100
+WORKDIR /app
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/apps/web/package.json ./apps/web/package.json
+COPY --from=builder /app/apps/web/node_modules ./apps/web/node_modules
+COPY --from=builder /app/apps/web/.next ./apps/web/.next
+COPY --from=builder /app/apps/web/public ./apps/web/public
+COPY --from=builder /app/packages ./packages
+EXPOSE 3100
+CMD ["pnpm", "--filter", "web", "start"]

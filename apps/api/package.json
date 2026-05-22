@@ -1,0 +1,38 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev": "ts-node --project tsconfig.json src/main.ts",
+    "start": "node dist/main.js",
+    "start:worker": "node dist/worker.js",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "test": "node --import tsx --test src/common/guards/event-access.guard.test.ts src/modules/auth/services/auth.service.test.ts src/test/checkout-payments.integration.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prisma:generate": "prisma generate --schema ../../prisma/schema.prisma",
+    "prisma:migrate": "tsx ../../scripts/apply-migrations.ts",
+    "prisma:seed": "tsx ../../prisma/seed.ts"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.23",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.1.23",
+    "@nestjs/platform-express": "^11.1.23",
+    "@prisma/client": "^6.19.0",
+    "@senha-do-vaqueiro/shared": "workspace:*",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "redis": "^5.12.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@senha-do-vaqueiro/config": "workspace:*",
+    "@types/express": "^5.0.6",
+    "prisma": "^6.19.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2"
+  }
+}

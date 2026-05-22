@@ -1,0 +1,8 @@
+{
+  "extends": "./packages/config/tsconfig/base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "tsBuildInfoFile": "dist/tsconfig.scripts.tsbuildinfo"
+  },
+  "include": ["prisma/**/*.ts", "scripts/**/*.ts"]
+}

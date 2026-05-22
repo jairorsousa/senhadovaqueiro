@@ -1,0 +1,37 @@
+{
+  "name": "senha-do-vaqueiro",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo do MVP Senha do Vaqueiro.",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "pg": "^8.13.1"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "eslint scripts/**/*.ts prisma/**/*.ts && pnpm -r lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "pnpm -r test",
+    "typecheck": "tsc -p tsconfig.scripts.json --noEmit && pnpm -r typecheck",
+    "db:migrate": "pnpm --filter api prisma:migrate",
+    "db:seed": "pnpm --filter api prisma:seed"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.11.10",
+    "eslint": "^9.15.0",
+    "prettier": "^3.3.3",
+    "prisma": "^6.19.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0"
+  }
+}

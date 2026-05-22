@@ -1,0 +1,19 @@
+{
+  "name": "@senha-do-vaqueiro/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./eslint/base.mjs": "./eslint/base.mjs",
+    "./prettier": "./prettier/base.json"
+  },
+  "scripts": {
+    "dev": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "test": "echo \"config: nenhum teste configurado ainda\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {}
+}
